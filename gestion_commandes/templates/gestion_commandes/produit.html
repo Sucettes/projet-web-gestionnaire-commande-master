@@ -1,0 +1,162 @@
+{% extends "gestion_commandes/base.html" %}
+{% block titre %}Commande{% endblock %}
+{% block nav %}
+    {% load static %}
+    <a href="{% url 'deconnexion' %}" class="navbar-brand">
+        <div class="iconBouton"><img src="{% static 'img/logout.png' %}" alt="icon logout"/>Déconnexion</div>
+    </a>{% endblock %}
+{% block contenu %}
+    {% if creation %}
+        <h2>Création Produit</h2>
+    {% endif %}
+    {% if modification %}
+        <h2>Modification Produit</h2>
+    {% endif %}
+    <br>
+    <div class="alert alert-success msg none" id="msg_success" role="alert">
+    </div>
+    <div class="alert alert-danger msg none" id="msg_error" role="alert">
+    </div>
+    {% if msg_erreur %}
+        <div class="alert alert-danger msg" role="alert">
+            <ul>
+                {% for message_erreur in msg_erreur %}
+                    <li>{{ message_erreur }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+    {% if message %}
+        <div class="alert alert-success msg" role="alert">
+            <p>{{ message }}</p>
+        </div>
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="input-group mb-3 formChamp">
+            <label class="input-group-text" id="inputGroup-sizing-default" for="nom">Nom</label>
+            {% if modification %}
+                <input class="form-control" name="nom" id="nom" type="text" required value="{{ produit.nom }}">
+            {% endif %}
+
+            {% if creation %}
+                <input class="form-control" name="nom" id="nom" type="text" required>
+            {% endif %}
+        </div>
+        <div class="input-group mb-3 formChamp">
+            <label class="input-group-text" id="inputGroup-sizing-default" for="prix">Prix</label>
+            {% if modification %}
+                <input class="form-control" name="prix" id="prix" type="number" min="0.00" step="0.01" required
+                       value="{{ produit.prix }}">
+            {% endif %}
+            {% if creation %}
+                <input class="form-control" name="prix" id="prix" type="number" min="0.00" step="0.01" required>
+            {% endif %}
+        </div>
+        <div class="input-group mb-3 formChamp">
+            <label class="input-group-text" id="inputGroup-sizing-default" for="description">
+                Description</label>
+            {% if modification %}
+                <input class="form-control" name="description" id="description" type="text" required
+                       value="{{ produit.description }}">
+            {% endif %}
+            {% if creation %}
+                <input class="form-control" name="description" id="description" type="text" required>
+            {% endif %}
+        </div>
+        {% if modification %}
+            <div class="flex-row-2">
+                <div class="cat-vert">
+                    <div>
+                        <div><h3>Categories</h3></div>
+                        {% for categorie in categories %}
+                            {% if produit.categorie == categorie.nom %}
+                                <div>
+                                    <input type="radio" value="{{ categorie.nom }}" id="{{ categorie.id }}"
+                                           name="categorie"
+                                           aria-label="{{ categorie.nom }}" required checked>
+                                    <label for="{{ categorie.id }}">{{ categorie.nom }}</label>
+                                </div>
+                            {% else %}
+                                <div>
+                                    <input type="radio" value="{{ categorie.nom }}" id="{{ categorie.id }}"
+                                           name="categorie"
+                                           aria-label="{{ categorie.nom }}" required>
+                                    <label for="{{ categorie.id }}">{{ categorie.nom }}</label>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div>
+                    <div class="allingCenter"><h3>En Stock</h3></div>
+                    <div class="allingCenter">
+                        {% if produit.en_stock %}
+                            <div>
+                                <input type="checkbox" value="True" id="en_stock" name="en_stock" aria-label="en_stock"
+                                       checked>
+                                <label for="en_stock">En Stock:</label>
+                            </div>
+                        {% else %}
+                            <div>
+                                <input type="checkbox" value="True" id="en_stock" name="en_stock" aria-label="en_stock">
+                                <label for="en_stock">En Stock</label>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            </div>
+            <hr class="hr80">
+        {% endif %}
+        {% if creation %}
+            <div class="cat-vert">
+                <div>
+                    <div><h3>Categories</h3></div>
+                    {% for categorie in categories %}
+                        <div>
+                            <input type="radio" value="{{ categorie.nom }}" id="{{ categorie.id }}" name="categorie"
+                                   aria-label="{{ categorie.nom }}" required>
+                            <label for="{{ categorie.id }}">{{ categorie.nom }}</label>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <hr class="hr80">
+        {% endif %}
+
+        <div class="allingCenter">
+            {% load static %}
+            <a href="{% url 'produits' %}" class="btn btn-primary margin1">
+                <div class="iconBouton">
+                    <img src="{% static 'img/previous.png' %}" alt="icon previous"/> Retour gestion produits
+                </div>
+            </a>
+            {% load static %}
+            {% if modification %}
+            <a class="btn btn-primary margin1" id="reset">
+                <div class="iconBouton"><img src="{% static 'img/reload.png' %}" alt="icon reload"/></div>
+            </a>
+            {% endif %}
+            {% if creation %}
+                <button type="submit" class="btn btn-primary margin1">
+                    <div class="iconBouton"><img src="{% static 'img/save.png' %}" alt="icon save"/> Enregistrer</div>
+                </button>
+            {% endif %}
+            {% if modification %}
+                <a id="modifier" class="btn btn-primary margin1">
+                    <div class="iconBouton"><img src="{% static 'img/save.png' %}" alt="icon save"/> Enregistrer</div>
+                </a>
+            {% endif %}
+        </div>
+    </form>
+{% endblock %}
+
+
+{% block scripts %}
+    {% if modification %}
+        {% load static %}
+        <script src="{% static 'js/modification_produit.js' %}"></script>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends "gestion_commandes/base.html" %}
+{% block titre %}Commande{% endblock %}
+{% block nav %}
+    {% load static %}
+    <a href="{% url 'deconnexion' %}" class="navbar-brand">
+        <div class="iconBouton"><img src="{% static 'img/logout.png' %}" alt="icon logout"/>Déconnexion</div>
+    </a>
+{% endblock %}
+{% block contenu %}
+    <h2>Recherche de produits</h2>
+    <br>
+    <div class="alert alert-success msg none" id="message_ajout" role="alert">
+        <p>{{ message }}</p>
+    </div>
+    <div class="alert alert-danger msg none" id="message_erreur" role="alert">
+        <p>{{ msg_erreur }}</p>
+    </div>
+
+    <form class="flex-container-inline">
+        {% csrf_token %}
+        <div style="margin-left: auto; margin-right: auto; max-width: 13rem;">
+            <h3>Categories</h3>
+            <input type="radio" value="all" id="all" name="categorie"
+                   aria-label="Toutes les catégories" checked>
+            <label for="all">Toutes les catégories</label>
+            {% for categorie in categories %}
+                <div>
+                    <input type="radio" value="{{ categorie.nom }}" id="{{ categorie.id }}" name="categorie"
+                           aria-label="{{ categorie.nom }}">
+                    <label for="{{ categorie.id }}">{{ categorie.nom }}</label>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="input-group mb-3 formChamp champRecherche">
+            <input class="form-control" type="search" placeholder="Recherche" name="recherche" id="recherche"
+                   aria-label="Recherche" class="recherche">
+            <div class="list-group lstPrioritaire lstProduit" id="suggestion"></div>
+            <div class="list-group lstPrioritaire lstProduit" id="msg"></div>
+        </div>
+    </form>
+    <div class="retour_recherche">
+        {% load static %}
+        <a href="{% url 'commande' commande_id %}" class="btn btn-primary margin1">
+            <div class="iconBouton">
+                <img src="{% static 'img/previous.png' %}" alt="icon previous"/> Retour commande
+            </div>
+        </a>
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+    {% load static %}
+    <script src="{% static 'js/recherche_produit.js' %}"></script>
+{% endblock %}

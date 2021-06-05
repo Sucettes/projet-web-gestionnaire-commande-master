@@ -1,0 +1,21 @@
+{% extends "gestion_commandes/base.html" %}
+{% block titre %}404{% endblock %}
+{% block contenu %}
+    <h2>Erreur 404</h2>
+    <br>
+    <hr class="hr80">
+    <div class="alert alert-warning msg" role="alert">
+        <p>Oupssi! Aucune ressource n'a été trouvée!</p>
+        <p>Appuyer sur le bouton bleu ci-dessous pour retourner à l'accueil.</p>
+    </div>
+
+    <div class="allingCenter">
+        {% load static %}
+        <a href="{% url 'index' %}" class="btn btn-primary margin1">
+            <div class="iconBouton">
+                <img src="{% static 'img/previous.png' %}" alt="icon previous"/> Retour accueil
+            </div>
+        </a>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,19 @@
+[{
+  "_id": {
+    "$oid": "605a0eae6d7261699426f006"
+  },
+  "nom": "Florent",
+  "prenom": "Derocher",
+  "mdp": "1234",
+  "email": "user@user.com",
+  "est_admin": false
+},{
+  "_id": {
+    "$oid": "605a7e6ab92ecf81e216f04b"
+  },
+  "nom": "Un",
+  "prenom": "Administrateur",
+  "mdp": "1234",
+  "email": "admin@admin.com",
+  "est_admin": true
+}]

@@ -1,0 +1,28 @@
+[{
+  "_id": {
+    "$oid": "606a17b6ff473f65e33d3fcd"
+  },
+  "nom": "Haltère GoldGym Pro",
+  "prix": 13.99,
+  "description": "Haltère de 15 lbs de marque GoldGym Pro. Fabriqué aux États-Unis.",
+  "categorie": "Poids et haltères",
+  "en_stock": true
+},{
+  "_id": {
+    "$oid": "60778a5b57f2118cadbd6164"
+  },
+  "nom": "Virgin Rubber Hex Dumbbell",
+  "prix": 40,
+  "description": "Haltère hexagonale de marque Virgin de 20lbs. Fabriqué au Canada.",
+  "categorie": "Poids et haltères",
+  "en_stock": false
+},{
+  "_id": {
+    "$oid": "6079d7ae745a6bfcb937665f"
+  },
+  "nom": "Iso Whey Vanilla Flavor",
+  "prix": 69.99,
+  "description": "Proteine de marque Iso. 6LBS de whey a la vanille.",
+  "categorie": "Compléments alimentaires",
+  "en_stock": true
+}]

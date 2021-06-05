@@ -1,0 +1,190 @@
+{% extends "gestion_commandes/base.html" %}
+{% block titre %}Inscription{% endblock %}
+{% block nav %}
+    {% load static %}
+    <a href="{% url 'deconnexion' %}" class="navbar-brand">
+        <div class="iconBouton"><img src="{% static 'img/logout.png' %}" alt="icon logout"/>Déconnexion</div>
+    </a>
+{% endblock %}
+{% block contenu %}
+    {% if creation %}
+        <h2>Création d'un utilisateur</h2>
+    {% endif %}
+    {% if modification %}
+        <h2>Modification d'un utilisateur</h2>
+    {% endif %}
+    <br>
+    <div class="allingCenter">
+        <a href="{% url 'admin' %}" class="btn btn-primary margin1">
+            <div class="iconBouton">
+                <img src="{% static 'img/previous.png' %}" alt="icon previous"/> Retour menu admin
+            </div>
+        </a>
+    </div>
+    <div class="alert msg none" id="msg_supprimer"></div>
+    <div class="alert alert-success msg none" id="msg_success" role="alert">
+    </div>
+    <div class="alert alert-danger msg none" id="msg_error" role="alert">
+    </div>
+    {% if msg_erreur %}
+        <div class="alert alert-danger msg" role="alert">
+            <ul>
+                {% for message_erreur in msg_erreur %}
+                    <li>{{ message_erreur }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+    {% if message %}
+        <div class="alert alert-success msg" role="alert">
+            <p>{{ message }}</p>
+        </div>
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        <div class="input-group mb-3 formChamp">
+            <label class="input-group-text" id="inputGroup-sizing-default" for="nom">Nom</label>
+            {% if creation %}
+                <input class="form-control" type="text" id="nom" name="nom" required>
+            {% endif %}
+            {% if modification %}
+                <input class="form-control" type="text" id="nom" name="nom"
+                       value="{{ utilisateur.nom }}" required>
+            {% endif %}
+        </div>
+        <div class="input-group mb-3 formChamp">
+            <label class="input-group-text" id="inputGroup-sizing-default" for="prenom">Prenom</label>
+            {% if creation %}
+                <input class="form-control" type="text" id="prenom" name="prenom" required>
+            {% endif %}
+            {% if modification %}
+                <input class="form-control" type="text" id="prenom" name="prenom" value="{{ utilisateur.prenom }}"
+                       required>
+            {% endif %}
+        </div>
+        <div class="input-group mb-3 formChamp">
+            <label class="input-group-text" id="inputGroup-sizing-default" for="email">Email</label>
+            {% if creation %}
+                <input class="form-control" type="email" id="email" name="email" required placeholder="abc@gmail.com">
+            {% endif %}
+            {% if modification %}
+                <input class="form-control" type="email" id="email" name="email" value="{{ utilisateur.email }}"
+                       placeholder="abc@gmail.com" disabled>
+            {% endif %}
+        </div>
+        <div class="input-group mb-3 formChamp">
+            <label class="input-group-text" id="inputGroup-sizing-default" for="mdp">Mots de passe</label>
+            {% if creation %}
+                <input class="form-control" id="mdp" name="mdp" type="password" placeholder="*****" required>
+            {% endif %}
+            {% if modification %}
+                <input class="form-control" id="mdp" name="mdp" type="password" placeholder="*****"
+                       value="{{ utilisateur.mdp }}" required>
+            {% endif %}
+        </div>
+        <div class="input-group mb-3 formChamp">
+            <label class="input-group-text"
+                   id="inputGroup-sizing-default" for="mdpConf">Mots de passe confirmation</label>
+            {% if creation %}
+                <input class="form-control" id="mdpConf" name="mdpConf" type="password" placeholder="*****" required>
+            {% endif %}
+            {% if modification %}
+                <input class="form-control" id="mdpConf" name="mdpConf" type="password" placeholder="*****"
+                       value="{{ utilisateur.mdp }}" required>
+            {% endif %}
+        </div>
+        <div class="allingCenter">
+            {% if creation %}
+                <input type="checkbox" value="estAdmin" id="estAdmin" name="estAdmin"
+                       aria-label="estAdmin">
+            {% endif %}
+            {% if modification %}
+                {% if utilisateur.est_admin %}
+                    <input type="checkbox" value="True" id="estAdmin" name="estAdmin"
+                           aria-label="estAdmin" checked>
+                {% else %}
+                    <input type="checkbox" value="True" id="estAdmin" name="estAdmin"
+                           aria-label="estAdmin">
+                {% endif %}
+            {% endif %}
+            <label for="estAdmin">Admin</label>
+        </div>
+        <br>
+        <div class="allingCenter">
+            {% if modification %}
+                {% load static %}
+                <a class="btn btn-danger margin1" id="supprimer_utilisateur">
+                    <div class="iconBouton">
+                        <img src="{% static 'img/garbage.png' %}" alt="icon garbage"/> Supprimer
+                    </div>
+                </a>
+            {% endif %}
+            <a id="reset" class="btn btn-primary margin1">
+                <div class="iconBouton">
+                    <img src="{% static 'img/reload.png' %}"/></div>
+            </a>
+            {% if creation %}
+                <button type="submit" class="btn btn-primary margin1">
+                    <div class="iconBouton"><img src="{% static 'img/save.png' %}" alt="icon save"/> Enregistrer</div>
+                </button>
+            {% endif %}
+            {% if modification %}
+                <a id="modifier" class="btn btn-primary margin1">
+                    <div class="iconBouton"><img src="{% static 'img/save.png' %}" alt="icon save"/> Enregistrer</div>
+                </a>
+            {% endif %}
+        </div>
+    </form>
+
+    {% if modification %}
+        <h2>Liste des commandes de l'utilisateur</h2>
+        <div class="flex-row-auto">
+            {% for commande in commandes_utilisateur %}
+                <div class="carte-commande">
+                    <h3>{{ commande.nom }}</h3>
+                    <hr>
+                    <p class="allingCenter">Total: {{ commande.total }} $</p>
+                    <hr>
+                    {% if commande.relation_produit|length > 0 %}
+                        <ul>
+                            {% for produit in commande.relation_produit|slice:":7" %}
+                                <li>{{ produit.nom }}</li>
+                            {% endfor %}
+                            {% if commande.relation_produit|length > 7 %}
+                                <div class="plus">
+                                    {% for produit in commande.relation_produit %}
+                                        {% if forloop.counter > 7 %}
+                                            <li>{{ produit.nom }}</li>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                                </ul>
+                                <div class="allingCenter">
+                                    <a class="btn btn-primary margin1" id="btn_plus_moins">Voir Plus</a>
+                                </div>
+                            {% else %}
+                                </ul>
+                            {% endif %}
+
+                    {% else %}
+                        <div class="allingCenter">
+                            <div class="alert alert-warning msg" role="alert">Aucun produit</div>
+                        </div>
+                    {% endif %}
+                </div>
+            {% empty %}
+                <p class="list-group-item list-group-item-action list-group-item-warning msg">Aucune commande n'a été
+                    trouvée.</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block scripts %}
+    {% if modification %}
+        {% load static %}
+        <script src="{% static 'js/supprimer_utilisateur.js' %}"></script>
+        <script src="{% static 'js/modification_utilisateur.js' %}"></script>
+        <script src="{% static 'js/carte.js' %}"></script>
+    {% endif %}
+{% endblock %}

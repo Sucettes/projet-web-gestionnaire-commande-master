@@ -1,0 +1,59 @@
+{% extends "gestion_commandes/base.html" %}
+{% block titre %}Commande{% endblock %}
+{% block nav %}
+    {% load static %}
+    <a href="{% url 'deconnexion' %}" class="navbar-brand">
+        <div class="iconBouton"><img src="{% static 'img/logout.png' %}" alt="icon logout"/>Déconnexion</div>
+    </a>
+{% endblock %}
+{% block contenu %}
+    <h2>Gestion des produits</h2>
+    <br>
+    <div class="allingCenter">
+        <a href="{% url 'admin' %}" class="btn btn-primary margin1">
+            <div class="iconBouton">
+                <img src="{% static 'img/previous.png' %}" alt="icon previous"/> Retour menu admin
+            </div>
+        </a>
+    </div>
+    <div>
+        <h2>Liste des produits</h2>
+        <div class="allingCenter">
+            {% load static %}
+            <a href="{% url 'creation_produit' %}" class="btn btn-primary margin1">
+                <div class="iconBouton">
+                    <img src="{% static 'img/add.png' %}" alt="icon add"/> Créer un produit
+                </div>
+            </a>
+        </div>
+        {% if produits %}
+            <br>
+            <div class="list-group lstProduit">
+                {% for produit in produits %}
+                    <p>
+                        <b>{{ produit.nom }}</b>
+                        <a href="{% url 'modifier_produit' id_produit=produit.id %}" class="iconBouton">
+                            <img src="{% static 'img/edit.png' %}" alt="icon edit"/>
+                        </a>
+                    </p>
+                    {% if not produit.en_stock %}
+                        <p class="rupture_stock"><b>RUPTURE DE STOCK</b></p>
+                    {% endif %}
+                    <p></p>
+                    <ul>
+                        <li>Description : {{ produit.description }}</li>
+                        <li>Categorie : {{ produit.categorie }}</li>
+                        <li>Prix : {{ produit.prix }} $</li>
+                    </ul>
+                    <hr>
+                {% empty %}
+                    <p>Aucune commande n'a été trouvée.</p>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="list-group lstProduit msg">
+                <p class="list-group-item list-group-item-action list-group-item-warning">Aucun produits.</p>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

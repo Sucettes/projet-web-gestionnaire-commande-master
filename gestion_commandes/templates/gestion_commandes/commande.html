@@ -1,0 +1,108 @@
+{% extends "gestion_commandes/base.html" %}
+{% block titre %}Commande{% endblock %}
+{% block nav %}
+    {% load static %}
+    <a href="{% url 'deconnexion' %}" class="navbar-brand">
+        <div class="iconBouton"><img src="{% static 'img/logout.png' %}" alt="icon logout"/>Déconnexion</div>
+    </a>
+{% endblock %}
+{% block contenu %}
+    <h2>Commande</h2>
+    <br>
+    <div class="alert alert-success msg none" id="msg_success" role="alert">
+    </div>
+    <div class="alert alert-danger msg none" id="msg_error" role="alert">
+    </div>
+    <div class="alert msg none" id="msg_suppression" role="alert"></div>
+    {% if message %}
+        <div class="alert alert-success msg" role="alert">
+            <p>{{ message }}</p>
+        </div>
+    {% endif %}
+    {% if msg_erreur %}
+        <div class="alert alert-danger msg" role="alert">
+            <p>{{ msg_erreur }}</p>
+        </div>
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="input-group mb-3 formChamp">
+            <label class="input-group-text" id="inputGroup-sizing-default" for="id">Numéro de la commande</label>
+            <input class="form-control" name="id" id="id" value="{{ commande.id }}" type="text" disabled>
+        </div>
+        <div class="input-group mb-3 formChamp">
+            <label class="input-group-text" id="inputGroup-sizing-default" for="nom">Nom</label>
+            <input class="form-control" name="nom" id="nom" value="{{ commande.nom }}" type="text">
+        </div>
+        <div class="input-group mb-3 formChamp">
+            <label class="input-group-text" id="inputGroup-sizing-default" for="date_creation">
+                Date de création</label>
+            <input class="form-control" name="date_creation" id="date_creation" value="{{ commande.date_creation }}"
+                   disabled>
+        </div>
+        <div class="input-group mb-3 formChamp">
+            <label class="input-group-text" id="inputGroup-sizing-default" for="email">Email</label>
+            <input class="form-control" name="email" id="email" value="{{ commande.email_utilisateur }}" type="email"
+                   disabled>
+        </div>
+        <div>
+            <h3>Produits</h3>
+            <div class="allingCenter">
+                <a href="{% url 'recherche' commande.id %}" class="btn btn-primary margin1">
+                    <div class="iconBouton"><img src="{% static 'img/add.png' %}" alt="icon add"/>Ajouter produit</div>
+                </a>
+            </div>
+            {% if commande.relation_produit %}
+                <div class="list-group lstProduit">
+                    {% for produit in commande.relation_produit %}
+                        <a class="list-group-item list-group-item-info retirer-produit"
+                           href="{% url 'retirer_produit_commande' id_commande=commande.id id_relation_produit=produit.id %}">
+                            <span class="plus"><b>Retirer</b></span>
+                            <p>
+                                <b>{{ produit.nom }}</b> | <b>{{ produit.prix }}$</b> | {{ produit.description }} </p>
+                        </a>
+                    {% endfor %}
+                </div>
+
+            {% else %}
+                <div class="list-group lstProduit msg">
+                    <p class="list-group-item list-group-item-action list-group-item-warning">Aucun produits.</p>
+                </div>
+            {% endif %}
+        </div>
+
+        <br>
+
+        <div class="input-group mb-3 formChamp">
+            <label class="input-group-text" id="inputGroup-sizing-default" for="sous_total">Sous total</label>
+            <input class="form-control" name="sous_total" id="sous_total" value="{{ commande.total_avant_taxes }} $"
+                   type="text" disabled>
+        </div>
+
+        <div class="input-group mb-3 formChamp">
+            <label class="input-group-text" id="inputGroup-sizing-default" for="total">Total</label>
+            <input class="form-control" name="total" id="total" value="{{ commande.total }} $"
+                   type="text" disabled>
+        </div>
+
+        <div class="allingCenter">
+            <a class="btn btn-danger margin1" id="supprimer_commande">
+                <div class="iconBouton"><img src="{% static 'img/garbage.png' %}" alt="icon garbage"/> Supprimer</div>
+            </a>
+            <a class="btn btn-primary margin1" id="reset">
+                <div class="iconBouton"><img src="{% static 'img/reload.png' %}" alt="icon reload"/></div>
+            </a>
+            <a id="modifier" class="btn btn-primary margin1">
+                <div class="iconBouton"><img src="{% static 'img/save.png' %}" alt="icon save"/> Enregistrer</div>
+            </a>
+        </div>
+    </form>
+    <br>
+{% endblock %}
+
+{% block scripts %}
+    {% load static %}
+    <script src="{% static 'js/supprimer_commande.js' %}"></script>
+    <script src="{% static 'js/modification_commande.js' %}"></script>
+{% endblock %}

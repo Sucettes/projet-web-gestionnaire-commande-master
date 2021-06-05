@@ -1,0 +1,251 @@
+@import url('https://fonts.googleapis.com/css2?family=Acme&display=swap'); // importation des fonts pour les titres.
+
+$primary: rgb(69,73,252); // couleur primaire du site web.
+$secondary: #1F2667; // couleur segondaire du site web.
+$tertiary: rgb(253,29,151); // la 3em couleur principale du site.
+$footerColor: #1F2667; // couleur du background du footer.
+$footerTextColor: whitesmoke; // couleur du text du footer.
+$red: red; // couleur rouge du site web.
+$lienColor: #0072ff; // couleur des liens.
+$white: white; // le blanc du site web.
+$ombre: #5C5C5C; // couleur des ombres de la page.
+$fontFamilyTitre: 'Acme', sans-serif; // Font des titres.
+$bootstrapRed: #a94442; //couleur bootsrap rouge
+$bootstrapBorder: #ebccd1; //couleur bootsrap rouge
+$bootstrapBackGround: #f2dede; //couleur bootsrap background
+$bootstrapBlue:rgb(97, 160, 230); //couleur bootstrap bleu
+$bootstrapSuccess: rgba(92, 184, 92, 0.92); //couleur bootstrap success
+$greenText: #307117; //couleur verte texte
+
+body {
+    h2, h3 {
+        text-align: center;
+        font-size: 2rem;
+        padding-top: 1rem;
+        font-family: $fontFamilyTitre;
+    }
+    h1, h4, h5, h6 {font-family: $fontFamilyTitre;}
+
+    header {
+        nav {
+            color: $secondary;
+            ul {
+                display: flex;
+                list-style-type: none;
+            }
+        }
+        .bandeColor{
+            // Bande de couleur qui est dans le header.
+            height: 15rem;
+            width: 100%;
+            background: linear-gradient(111deg, $primary 0%, $tertiary 35%, $primary 100%);
+        }
+    }
+
+    main {
+        position: relative;
+        max-width: 74rem;
+        margin:-50px auto 0;
+        z-index: 3;
+        background-color: $white;
+        box-shadow: 0px -8px 14px $ombre;
+        min-height: 750px;
+        color: $secondary;
+        a {
+            // liens qui sont dans le main.
+            color: $lienColor;
+            text-decoration: none;
+        }
+        .msg {
+            // messages qui est afficher (alert)
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 60rem;
+
+            p { text-align: center; }  // Paragraphe dans la class .msg
+        }
+        .rupture_stock {
+            // message quand un produit est en rupture de stock.
+            color: $red;
+            margin: 0;
+        }
+        .formChamp {
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 40rem;
+
+        }
+        .recherche{
+            max-width: 100%;
+            width: 100%;
+        }
+        .champRecherche{margin-top: 2.8rem;}
+        .lstPrioritaire{
+            max-width: 100%!important;
+            width: 100%!important;
+        }
+        .lstProduit {
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 40rem;
+        }
+        .flex-container-inline{
+            // Conteneur Recherche Produit
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-content: stretch;
+            align-items: flex-start;
+            min-height: 15rem;
+        }
+        #suggestion a:hover{
+            cursor: pointer;
+        }
+        .retour_recherche{
+            float: left;
+            margin-left: 3.5rem;
+        }
+        .cat-vert{
+            display:flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+        .flex-row-2{
+            display:flex;
+            flex-direction: row;
+            justify-content: space-around;
+        }
+        .carte-commande{
+            box-shadow: 0 0.25rem 0.5rem 0 rgba(0,0,0,0.2);
+            transition: 0.3s;
+            width: 13.5rem;
+            margin-left: 2rem;
+            min-height: 25rem;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            .extend{
+                height: auto;
+                z-index: 1;
+            }
+            h3{
+                font-size: 1.2rem;
+            }
+        }
+        .flex-row-auto{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: flex-start;
+            align-content: flex-start;
+        }
+        .plus{
+            display: none;
+        }
+        .retirer-produit{
+            p{
+                //Enleve le gap des paragraphe par défaut.
+                margin-bottom: 0;
+            }
+        }
+        .retirer-produit:hover{
+            border-radius: 4px;
+            background-color: $bootstrapBackGround;
+            border-color:$bootstrapBorder;
+            color: $bootstrapRed;
+            text-align: center;
+            p{
+                display: none;
+            }
+            span{
+                display: inline;
+            }
+        }
+        .modifier-hover{
+            p{
+                //Enleve le gap des paragraphe par défaut.
+                margin-bottom: 0;
+            }
+        }
+        .modifier-hover:hover{
+            border-radius: 4px;
+            background-color: $bootstrapBlue;
+            border-color: $primary;
+            color: $secondary;
+            text-align: center;
+            p{
+                display: none;
+            }
+            span{
+                display: inline;
+            }
+        }
+        .produit-ajouter{
+            width: 100%;
+            max-width: 100%;
+            p{
+                //Enleve le gap des paragraphe par défaut.
+                margin-bottom: 0;
+            }
+        }
+        .produit-ajouter:hover{
+            border-radius: 4px;
+            background-color: $bootstrapSuccess;
+            border-color: $bootstrapBorder;
+            color: $greenText;
+            text-align: center;
+            p{
+                display: none;
+            }
+            span{
+                display: inline;
+            }
+        }
+    }
+
+    footer {
+        background-color: $footerColor;
+        min-height: 200px;
+        color: $footerTextColor;
+        margin:-10px auto 0;
+
+        #footerSection {
+            // Contenue du footer
+            max-width: 74rem;
+            margin-left: auto;
+            margin-right: auto;
+
+            .div_footer {
+                // div de contenue dans le footer section qui est dans le footer.
+                display: flex;
+                justify-content: space-evenly;
+                justify-items: center;
+            }
+        }
+    }
+    .hr80 {
+        // barre de separations.
+        max-width: 80%;
+        height: 0.066rem;
+        margin-left: auto;
+        margin-right: auto;
+        color: $tertiary;
+    }
+    .allingCenter {
+        // centrer avec flex.
+        display: flex;
+        justify-content: center;
+    }
+    .iconBouton {img {max-width: 1.8rem;}} // les boutons avec icon.
+    .none{display: none;} // permet de cacher un element
+    .inl_block{display: inline-block;} // inline  block.
+    .margin1{ margin: 1rem;} // margin de 1rem.
+
+    // Selection de couleur.
+    ::-moz-selection {background: $tertiary;}
+    ::selection {background: $tertiary;}
+
+}

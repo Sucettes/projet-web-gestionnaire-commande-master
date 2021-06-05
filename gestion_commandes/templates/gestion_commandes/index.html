@@ -1,0 +1,59 @@
+{% extends "gestion_commandes/base.html" %}
+{% block titre %}Accueil{% endblock %}
+{% block nav %}
+    {% load static %}
+    <a href="{% url 'deconnexion' %}" class="navbar-brand">
+        <div class="iconBouton"><img src="{% static 'img/logout.png' %}" alt="icon logout"/>Déconnexion</div>
+    </a>
+{% endblock %}
+{% block contenu %}
+    <h2>Accueil</h2>
+    <br>
+    {% if admin %}
+        <div class="allingCenter">
+            <a href="{% url 'admin' %}" class="btn btn-primary margin1">
+                <div class="iconBouton"><img src="{% static 'img/settings.png' %}" alt="logo"/> Menu Admin</div>
+            </a>
+        </div>
+    {% endif %}
+    {% if msg_erreur %}
+        <div class="alert alert-danger msg" role="alert">
+            <p>{{ msg_erreur }}</p>
+        </div>
+    {% endif %}
+    {% if message %}
+        <div class="alert alert-success msg" role="alert">
+            <p>{{ message }}</p>
+        </div>
+    {% endif %}
+
+    <form method="post" action="">
+        {% csrf_token %}
+        <div class="input-group mb-3 formChamp">
+            <label class="input-group-text" id="inputGroup-sizing-default"
+                   for="nom_commande">Nom de la commande</label>
+            <input class="form-control" type="text" id="nom_commande" name="nom_commande" required>
+        </div>
+        <br>
+        <div class="allingCenter">
+            <button type="submit" class="btn btn-primary">
+                <div class="iconBouton"><img src="{% static 'img/add.png' %}" alt="Logo add"/> Créer commande</div>
+            </button>
+        </div>
+    </form>
+
+    <br>
+    <hr class="hr80">
+
+    <h3>Liste des commandes</h3>
+
+    <div class="list-group lstProduit">
+        {% for une_commande in commandesUtilisateur %}
+            <a href="{% url 'commande' une_commande.id %}"
+               class="list-group-item list-group-item-info modifier-hover">
+                <span class="plus"><b>Modifier</b></span>
+                <p>{{ une_commande.nom }}</p>
+            </a>
+        {% endfor %}
+    </div>
+{% endblock %}

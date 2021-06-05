@@ -1,0 +1,35 @@
+{% extends "gestion_commandes/base.html" %}
+{% block titre %}Authentification{% endblock %}
+{% block nav %}
+    <a href="{% url 'inscription' %}" class="navbar-brand">
+        {% load static %}
+        <div class="iconBouton"><img src="{% static 'img/clipboard.png' %}" alt="logo inscription" />Inscription</div>
+    </a>
+{% endblock %}
+{% block contenu %}
+    <h2>Authentification</h2>
+
+    <br>
+
+    {% if message is not null %}
+        <div class="alert alert-danger msg" role="alert">
+            <p>{{ message }}</p>
+        </div>
+    {% endif %}
+
+    <form method="post" action="">
+        {% csrf_token %}
+        <div class="input-group mb-3 formChamp">
+            <label class="input-group-text" id="inputGroup-sizing-default" for="email">Email</label>
+            <input class="form-control" type="email" id="email" name="email" required placeholder="abc@gmail.com">
+        </div>
+        <div class="input-group mb-3 formChamp">
+            <label class="input-group-text" id="inputGroup-sizing-default" for="mdp">Mots de passe</label>
+            <input class="form-control" id="mdp" name="mdp" type="password" required>
+        </div>
+        <br>
+        <div class="allingCenter">
+            <input type="submit" class="btn btn-primary" value="Connexion">
+        </div>
+    </form>
+{% endblock %}

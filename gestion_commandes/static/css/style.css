@@ -1,0 +1,269 @@
+@import url("https://fonts.googleapis.com/css2?family=Acme&display=swap");
+body h2, body h3 {
+  text-align: center;
+  font-size: 2rem;
+  padding-top: 1rem;
+  font-family: "Acme", sans-serif;
+}
+
+body h1, body h4, body h5, body h6 {
+  font-family: "Acme", sans-serif;
+}
+
+body header nav {
+  color: #1F2667;
+}
+
+body header nav ul {
+  display: flex;
+  list-style-type: none;
+}
+
+body header .bandeColor {
+  height: 15rem;
+  width: 100%;
+  background: linear-gradient(111deg, #4549fc 0%, #fd1d97 35%, #4549fc 100%);
+}
+
+body main {
+  position: relative;
+  max-width: 74rem;
+  margin: -50px auto 0;
+  z-index: 3;
+  background-color: white;
+  box-shadow: 0px -8px 14px #5C5C5C;
+  min-height: 750px;
+  color: #1F2667;
+}
+
+body main a {
+  color: #0072ff;
+  text-decoration: none;
+}
+
+body main .msg {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 60rem;
+}
+
+body main .msg p {
+  text-align: center;
+}
+
+body main .rupture_stock {
+  color: red;
+  margin: 0;
+}
+
+body main .formChamp {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 40rem;
+}
+
+body main .recherche {
+  max-width: 100%;
+  width: 100%;
+}
+
+body main .champRecherche {
+  margin-top: 2.8rem;
+}
+
+body main .lstPrioritaire {
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
+body main .lstProduit {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 40rem;
+}
+
+body main .flex-container-inline {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: stretch;
+  align-items: flex-start;
+  min-height: 15rem;
+}
+
+body main #suggestion a:hover {
+  cursor: pointer;
+}
+
+body main .retour_recherche {
+  float: left;
+  margin-left: 3.5rem;
+}
+
+body main .cat-vert {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+body main .flex-row-2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+body main .carte-commande {
+  box-shadow: 0 0.25rem 0.5rem 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  width: 13.5rem;
+  margin-left: 2rem;
+  min-height: 25rem;
+  margin-bottom: 1rem;
+  overflow: hidden;
+}
+
+body main .carte-commande .extend {
+  height: auto;
+  z-index: 1;
+}
+
+body main .carte-commande h3 {
+  font-size: 1.2rem;
+}
+
+body main .flex-row-auto {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  align-content: flex-start;
+}
+
+body main .plus {
+  display: none;
+}
+
+body main .retirer-produit p {
+  margin-bottom: 0;
+}
+
+body main .retirer-produit:hover {
+  border-radius: 4px;
+  background-color: #f2dede;
+  border-color: #ebccd1;
+  color: #a94442;
+  text-align: center;
+}
+
+body main .retirer-produit:hover p {
+  display: none;
+}
+
+body main .retirer-produit:hover span {
+  display: inline;
+}
+
+body main .modifier-hover p {
+  margin-bottom: 0;
+}
+
+body main .modifier-hover:hover {
+  border-radius: 4px;
+  background-color: #61a0e6;
+  border-color: #4549fc;
+  color: #1F2667;
+  text-align: center;
+}
+
+body main .modifier-hover:hover p {
+  display: none;
+}
+
+body main .modifier-hover:hover span {
+  display: inline;
+}
+
+body main .produit-ajouter {
+  width: 100%;
+  max-width: 100%;
+}
+
+body main .produit-ajouter p {
+  margin-bottom: 0;
+}
+
+body main .produit-ajouter:hover {
+  border-radius: 4px;
+  background-color: rgba(92, 184, 92, 0.92);
+  border-color: #ebccd1;
+  color: #307117;
+  text-align: center;
+}
+
+body main .produit-ajouter:hover p {
+  display: none;
+}
+
+body main .produit-ajouter:hover span {
+  display: inline;
+}
+
+body footer {
+  background-color: #1F2667;
+  min-height: 200px;
+  color: whitesmoke;
+  margin: -10px auto 0;
+}
+
+body footer #footerSection {
+  max-width: 74rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+body footer #footerSection .div_footer {
+  display: flex;
+  justify-content: space-evenly;
+  justify-items: center;
+}
+
+body .hr80 {
+  max-width: 80%;
+  height: 0.066rem;
+  margin-left: auto;
+  margin-right: auto;
+  color: #fd1d97;
+}
+
+body .allingCenter {
+  display: flex;
+  justify-content: center;
+}
+
+body .iconBouton img {
+  max-width: 1.8rem;
+}
+
+body .none {
+  display: none;
+}
+
+body .inl_block {
+  display: inline-block;
+}
+
+body .margin1 {
+  margin: 1rem;
+}
+
+body ::-moz-selection {
+  background: #fd1d97;
+}
+
+body ::selection {
+  background: #fd1d97;
+}

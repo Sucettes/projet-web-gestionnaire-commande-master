@@ -1,0 +1,54 @@
+{% extends "gestion_commandes/base.html" %}
+{% block titre %}Admin{% endblock %}
+{% block nav %}
+    {% load static %}
+    <a href="{% url 'deconnexion' %}" class="navbar-brand">
+        <div class="iconBouton"><img src="{% static 'img/logout.png' %}" alt="icon logout"/>Déconnexion</div>
+    </a>
+{% endblock %}
+{% block contenu %}
+    <h2>Admin</h2>
+    <br>
+    {% if categories %}
+        <h3>Liste des catégories</h3>
+        <br>
+    {% endif %}
+    {% if categories %}
+        <div class="list-group lstProduit">
+            {% for categorie in categories %}
+                <a class="list-group-item list-group-item-action list-group-item-info">{{ categorie.nom }}</a>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% if utilisateurs %}
+        <br>
+        <h3>Liste des utilisateurs</h3>
+        <br>
+        <div class="allingCenter">
+            <a href="{% url 'creation_utilisateur' %}" class="btn btn-primary">
+                <div class="iconBouton">
+                    <img src="{% static 'img/add.png' %}" alt="icon add" />Ajouter un utilisateur
+                </div>
+            </a>
+        </div>
+        <br>
+    {% endif %}
+    {% if utilisateurs %}
+        <div class="list-group lstProduit">
+            {% for utilisateur in utilisateurs %}
+                <a href="{% url 'modifier_utilisateur' id_utilisateur=utilisateur.id %}""
+                   class="list-group-item list-group-item-info modifier-hover">
+                    <span class="plus"><b>Modifier</b></span>
+                    <p class="inl_block">{{ utilisateur.email }}</p>
+                </a>
+            {% endfor %}
+        </div>
+    {% endif %}
+    <h3>Gérer les produits</h3>
+    <div class="allingCenter">
+        <a href="{% url 'produits' %}" class="btn btn-primary">Voir tous les produits</a>
+    </div>
+
+    <br>
+{% endblock %}

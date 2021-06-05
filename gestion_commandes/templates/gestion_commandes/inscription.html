@@ -1,0 +1,55 @@
+{% extends "gestion_commandes/base.html" %}
+{% block titre %}Inscription{% endblock %}
+{% block nav %}
+    <a href="{% url 'authentification' %}" class="navbar-brand">
+        {% load static %}
+        <div class="iconBouton"><img src="{% static 'img/login.png' %}" alt="logo Authentification"/>Authentification
+        </div>
+    </a>
+{% endblock %}
+{% block contenu %}
+    <h2>Inscription</h2>
+    <br>
+    {% if message %}
+        <div class="alert alert-success msg" role="alert">
+            <p>{{ message }}</p>
+        </div>
+    {% endif %}
+    {% if validationCreation is not null %}
+        <div class="alert alert-danger msg" role="alert">
+            <ul>
+                {% for msg_erreur in validationCreation %}
+                    <li>{{ msg_erreur }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        <div class="input-group mb-3 formChamp">
+            <label class="input-group-text" id="inputGroup-sizing-default" for="nom">Nom</label>
+            <input class="form-control" type="text" id="nom" name="nom" required>
+        </div>
+        <div class="input-group mb-3 formChamp">
+            <label class="input-group-text" id="inputGroup-sizing-default" for="prenom">Prenom</label>
+            <input class="form-control" type="text" id="prenom" name="prenom" required>
+        </div>
+        <div class="input-group mb-3 formChamp">
+            <label class="input-group-text" id="inputGroup-sizing-default" for="email">Email</label>
+            <input class="form-control" type="email" id="email" name="email" required placeholder="abc@gmail.com">
+        </div>
+        <div class="input-group mb-3 formChamp">
+            <label class="input-group-text" id="inputGroup-sizing-default" for="mdp">Mots de passe</label>
+            <input class="form-control" id="mdp" name="mdp" type="password" placeholder="*****" required>
+        </div>
+        <div class="input-group mb-3 formChamp">
+            <label class="input-group-text"
+                   id="inputGroup-sizing-default" for="mdpConf">Mots de passe confirmation</label>
+            <input class="form-control" id="mdpConf" name="mdpConf" type="password" placeholder="*****" required>
+        </div>
+        <br>
+        <div class="allingCenter">
+            <input type="submit" class="btn btn-primary" value="Créer">
+        </div>
+    </form>
+{% endblock %}

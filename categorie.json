@@ -1,0 +1,26 @@
+[{
+  "_id": {
+    "$oid": "60492e2d38c74a57ecc35379"
+  },
+  "nom": "Machine de musculation"
+},{
+  "_id": {
+    "$oid": "60492e2d38c74a57ecc3537a"
+  },
+  "nom": "Poids et haltères"
+},{
+  "_id": {
+    "$oid": "60492e2d38c74a57ecc3537b"
+  },
+  "nom": "Compléments alimentaires"
+},{
+  "_id": {
+    "$oid": "60492e2d38c74a57ecc3537c"
+  },
+  "nom": "Vêtements de sports"
+},{
+  "_id": {
+    "$oid": "60492e2d38c74a57ecc3537d"
+  },
+  "nom": "Autres"
+}]
